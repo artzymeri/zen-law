@@ -42,8 +42,10 @@ const expertiseAreas = [
   },
 ];
 
-const CARD_WIDTH = 300;
-const CARD_HEIGHT = 420;
+const DESKTOP_CARD_WIDTH = 300;
+const DESKTOP_CARD_HEIGHT = 420;
+const MOBILE_CARD_WIDTH = 200;
+const MOBILE_CARD_HEIGHT = 280;
 const GAP = 20;
 const ITEMS_COUNT = expertiseAreas.length;
 
@@ -59,6 +61,21 @@ export default function OurExpertise() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const isResettingRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Responsive card dimensions
+  const CARD_WIDTH = isMobile ? MOBILE_CARD_WIDTH : DESKTOP_CARD_WIDTH;
+  const CARD_HEIGHT = isMobile ? MOBILE_CARD_HEIGHT : DESKTOP_CARD_HEIGHT;
+
+  // Check for mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Calculate scroll position to determine center card + infinite scroll reset
   useEffect(() => {
@@ -100,7 +117,7 @@ export default function OurExpertise() {
     }
 
     return () => scrollContainer?.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [CARD_WIDTH]);
 
   // Mouse drag scrolling
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -222,14 +239,16 @@ export default function OurExpertise() {
                     {/* Dark gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
 
-                    {/* Card border and shadow */}
+                    {/* Card border and shadow - simplified on mobile */}
                     <div 
                       className="absolute inset-0 rounded-2xl transition-all duration-500"
                       style={{
                         border: isCenter ? '1px solid rgba(201, 162, 39, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)',
-                        boxShadow: isCenter 
-                          ? '0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(201, 162, 39, 0.15)' 
-                          : '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
+                        boxShadow: isMobile 
+                          ? 'none'
+                          : isCenter 
+                            ? '0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(201, 162, 39, 0.15)' 
+                            : '0 20px 40px -15px rgba(0, 0, 0, 0.7)',
                       }}
                     />
 
@@ -246,8 +265,8 @@ export default function OurExpertise() {
                       </p>
                     </div>
 
-                    {/* Active card glow */}
-                    {isCenter && (
+                    {/* Active card glow - desktop only */}
+                    {isCenter && !isMobile && (
                       <div 
                         className="absolute inset-0 rounded-2xl pointer-events-none"
                         style={{
@@ -261,15 +280,6 @@ export default function OurExpertise() {
             })}
           </div>
 
-          {/* Gradient fade edges */}
-          <div 
-            className="absolute left-0 top-0 bottom-0 w-48 bg-gradient-to-r from-dark-950 via-dark-950/70 to-transparent pointer-events-none" 
-            style={{ zIndex: 110 }} 
-          />
-          <div 
-            className="absolute right-0 top-0 bottom-0 w-48 bg-gradient-to-l from-dark-950 via-dark-950/70 to-transparent pointer-events-none" 
-            style={{ zIndex: 110 }} 
-          />
         </motion.div>
 
       </div>
