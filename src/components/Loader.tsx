@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
+import Image from 'next/image';
 
 interface LoaderProps {
   onLoadingComplete: () => void;
@@ -181,29 +182,20 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
 
           {/* Logo and brand */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative z-10 text-center"
+            initial={{ opacity: 0, y: 30, scale: 0.8, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="relative z-10"
           >
-            <motion.h1
-              className="text-5xl md:text-6xl font-bold tracking-wider"
-              initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 1, delay: 0.5 }}
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              <span className="text-white/90">ZEN</span>
-              <span className="text-white/60 ml-3">LAW</span>
-            </motion.h1>
-            <motion.p
-              className="text-white/30 text-sm tracking-[0.4em] uppercase mt-3"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              Solicitors
-            </motion.p>
+            <Image
+              src="/zen-law-icon.png"
+              alt="Zen Law Solicitors"
+              width={348}
+              height={115}
+              className="h-16 md:h-20 w-auto"
+              priority
+              unoptimized
+            />
           </motion.div>
 
           {/* Progress bar */}

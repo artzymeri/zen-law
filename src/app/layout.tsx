@@ -18,10 +18,25 @@ export const metadata: Metadata = {
   title: "Zen Law Solicitors | Personal Injury Specialists Manchester",
   description: "Zen Law Solicitors in Manchester - Personal injury specialists with 20 years experience. No win, no fee. Road traffic accidents, work injuries, medical negligence & more.",
   keywords: "personal injury solicitors, Manchester lawyers, no win no fee, road traffic accident claims, work injury compensation",
+  icons: {
+    icon: [
+      { url: "/zen-law-icon.png", type: "image/png" },
+    ],
+    apple: "/zen-law-icon.png",
+    shortcut: "/zen-law-icon.png",
+  },
   openGraph: {
     title: "Zen Law Solicitors | Personal Injury Specialists",
     description: "Manchester's leading personal injury law firm. No win, no fee guarantee.",
     type: "website",
+    images: [
+      {
+        url: "/zen-law-icon.png",
+        width: 512,
+        height: 512,
+        alt: "Zen Law Solicitors",
+      },
+    ],
   },
 };
 

@@ -28,7 +28,7 @@ const expertiseAreas = [
   {
     title: 'Medical Negligence',
     subtitle: 'Healthcare malpractice claims',
-    image: '/our-expertise/medical-negliegence.jpg',
+    image: '/our-expertise/medical-negligence.jpg',
   },
   {
     title: 'Criminal Injuries',
@@ -145,7 +145,7 @@ export default function OurExpertise() {
   return (
     <section 
       id="expertise" 
-      className="relative py-32"
+      className="relative py-32o"
       ref={containerRef}
     >
       <div className="relative z-10">
