@@ -20,10 +20,11 @@ export const metadata: Metadata = {
   keywords: "personal injury solicitors, Manchester lawyers, no win no fee, road traffic accident claims, work injury compensation",
   icons: {
     icon: [
-      { url: "/zen-law-icon.png", type: "image/png" },
+      { url: "/favicon.png", sizes: "any" },
+      { url: "/zen-law-icon.png", type: "image/png", sizes: "192x192" },
     ],
     apple: "/zen-law-icon.png",
-    shortcut: "/zen-law-icon.png",
+    shortcut: "/favicon.png",
   },
   openGraph: {
     title: "Zen Law Solicitors | Personal Injury Specialists",
